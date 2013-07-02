@@ -1,0 +1,66 @@
+<div ng-controller="galleryCtrl">
+    <div dd-gallery="forGallery" style="width: 60%;"></div>
+    <hr>
+    <h3>Setup gallery:</h3>
+    <form class="form-inline" ng-submit="addItem()">
+        <input type="text" ng-model="newItem"  size="30" placeholder="Add image url">
+        <input class="btn btn-primary" type="submit" value="add">
+    </form>
+    <blockquote>
+        <small><b>Click</b> for disable/enable image, <b>DbClick</b> for remove image</small>
+    </blockquote>         
+    <ul class="thumbnails">
+        <li ng-repeat="img in items">
+            <a href="" ng-click="toggle(img)" ng-dblclick="remove(img)" class="thumbnail disabled-{{img.disabled}}">
+                <img src="{{img.src}}" alt="" style="height:150px;" >
+            </a>
+        </li>
+    </ul>
+</div>
+    <script>
+    
+    
+        function galleryCtrl($scope, localStorageService){
+            $scope.items = angular.fromJson(localStorageService.get('ddGalleryItems')) || [];           
+            update();
+            $scope.addItem = function(){            
+                if($scope.newItem == '') return;
+                var img = {
+                    src: $scope.newItem,
+                    disabled: false
+                };
+                angular.element(new Image())
+                    .attr('src', img.src)
+                    .load(function(){
+                        img.width = this.width;
+                        img.height = this.height;
+                        $scope.items.push(img);
+                        update();
+                        $scope.$digest();   
+                    });
+                $scope.newItem = '';
+            }
+            $scope.toggle = function(img){
+                img.disabled = !img.disabled;
+                update();
+            }
+            $scope.remove = function(img){
+                var index=$scope.items.indexOf(img)
+                $scope.items.splice(index,1);
+                update();
+            }
+            function update(){
+                $scope.forGallery = [];
+                for(var i=0;i<$scope.items.length;i++){
+                    if(!$scope.items[i].disabled) $scope.forGallery.push($scope.items[i]);
+                }               
+                localStorageService.set('ddGalleryItems', angular.toJson($scope.items));                
+            }
+        }
+
+    </script>
+    <style>
+        .thumbnail.disabled-true {
+            opacity: 0.3;
+            }
+    </style>
