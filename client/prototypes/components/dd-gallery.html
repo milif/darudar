@@ -1,6 +1,4 @@
 <div ng-controller="galleryCtrl">
-    <div dd-gallery="forGallery" style="width: 60%;"></div>
-    <hr>
     <h3>Setup gallery:</h3>
     <form class="form-inline" ng-submit="addItem()">
         <input type="text" ng-model="newItem"  size="30" placeholder="Add image url">
@@ -16,6 +14,12 @@
             </a>
         </li>
     </ul>
+    <hr>
+    <div class="row-fluid">
+        <div class="span8">
+            <div dd-gallery="forGallery"></div>
+        </div>
+    </div>
 </div>
     <script>
     
