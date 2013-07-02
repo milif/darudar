@@ -75,9 +75,10 @@ defineDirective('ddGallery', ["ddImage", function(ddImage){
         data.type = "rows";
     }
     function pushNextRows(rows, iterator, cntWidth){
-        var data = iterator[0];
+        var data = iterator[0],
+            i = 0;
         while(iterator[1] < data.length) {
-            rows.push(getRow(iterator, NEXT_ROWS_RATIO));
+            rows.push(getRow(iterator, NEXT_ROWS_RATIO + (i++ % 2) * 0.5));
         }
         var lastRow = rows.pop();
         if(lastRow.volume < NEXT_ROWS_RATIO * 0.65) {
