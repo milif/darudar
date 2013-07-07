@@ -19,6 +19,7 @@ if($_bIsDebug) {
     $_version = $_version[1];
     
     if(!is_file($_C_DIR.'/'.$_sModule.'.'.$_version.".js")) {
+        if(!is_dir($_C_DIR)) mkdir($_C_DIR, 0755, true);
         build($_version);
     }
     echo "<link href=\"c/$_sModule.$_version.css\" media=\"all\" rel=\"stylesheet\" type=\"text/css\" />";
