@@ -1,5 +1,6 @@
 require.config({
     baseUrl: 'src',
+    waitSeconds: 600,
     paths: {
         'angular': 'vendor/angular/angular',
         'LocalStorageModule': 'vendor/localStorageService/LocalStorageModule'
