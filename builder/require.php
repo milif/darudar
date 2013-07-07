@@ -4,7 +4,7 @@ namespace DD\RequireJs;
 $_GIT_DIR = __DIR__."/../.git";
 $_C_DIR = __DIR__."/../c";
 
-$_bIsDebug = $_GET['debug'];
+$_bIsDebug = isset($_GET['debug']) && $_GET['debug']; 
 $_sModule = basename($require);
 
 if($_bIsDebug) {
