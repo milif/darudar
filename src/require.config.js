@@ -6,7 +6,7 @@ require.config({
         'LocalStorageModule': 'vendor/localStorageService/LocalStorageModule'
     },
     shim: {
-        'angular': { deps:['vendor/jquery/jquery','css!vendor/bootstrap/css/bootstrap'], export: 'angular'},
+        'angular': { deps:['vendor/jquery/jquery'], export: 'angular'},
         'LocalStorageModule': {deps:['angular']}
     },
     map: {

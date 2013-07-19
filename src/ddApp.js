@@ -1,7 +1,7 @@
 var appModule;
-define(['angular'], function(){
-    appModule = angular.module('ddApp', [])
-        .config(['$provide', function($provide){
+define(['angular','css!vendor/bootstrap/css/bootstrap','css!ddApp'], function(){    
+    appModule = angular.module('ddApp',['ngLocale'])
+        .config(['$provide',function($provide){
             $provide.factory('$ddData', function(){
                 return {
                     get: function(value){
@@ -9,11 +9,14 @@ define(['angular'], function(){
                     }
                 }
             });
-        }]); 
+        }])
+        .run(['$locale', function($locale){
+            $locale.DD = DD_LOCALE;
+        }]);
     return appModule;
 });
 
-var DD_Data = window.DD_Data || {};
+var DD_DATA = window.DD_DATA || {};
 function defineDirective(name, directive){
     appModule.directive(name, directive);
 }

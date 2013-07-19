@@ -1,4 +1,4 @@
-define(['ddApp','services/ddImage','css!components/ddGallery/ddGallery'],function(){
+define(['ddApp','services/ddImage','components/ddImage/ddImage','css!components/ddGallery/ddGallery'],function(){
     defineDirective('ddGallery', ["ddImage", function(ddImage){
         var FIRST_ROW_RATIO = 2.5,
             NEXT_ROWS_RATIO = 4,
@@ -21,7 +21,7 @@ define(['ddApp','services/ddImage','css!components/ddGallery/ddGallery'],functio
                 item = data[0];
                 item._width = Math.min(item.width, cntWidth);
                 item._height = Math.round(item._width / item.ratio);
-                item._src = ddImage.getSrcBySize(item.src, item._width, item._height);
+                item._src = ddImage.getSrc(item.src, item, {width: item._width, height: item._height});
             } else if(totalRatio >= FIRST_ROW_RATIO + NEXT_ROWS_RATIO || data.length == 2) {
                 buildRows(data, cntWidth);
             } else if(data[0].ratio > 1){
@@ -57,7 +57,7 @@ define(['ddApp','services/ddImage','css!components/ddGallery/ddGallery'],functio
                             item._height = Math.round(vertWidth / item.ratio);
                             totalVertHeight += item._height;
                         }
-                        item._src = ddImage.getSrcBySize(item.src, item._width, item._height);
+                        item._src = ddImage.getSrc(item.src, item, {width: item._width, height: item._height});
                     }
                     data[0]._width += rowWidth - data[0]._width - vertWidth;
                     item = data[data.length - 1];
@@ -108,7 +108,7 @@ define(['ddApp','services/ddImage','css!components/ddGallery/ddGallery'],functio
                     }
                     item._height = rowHeight;
                     item._width = Math.round(rowHeight * item.ratio);
-                    item._src = ddImage.getSrcBySize(item.src, item._width, item._height);
+                    item._src = ddImage.getSrc(item.src, item, { width: item._width, height: item._height});
                     rowTotalWidth += item._width;
                 }
                 item = row[row.length - 1];
@@ -141,8 +141,8 @@ define(['ddApp','services/ddImage','css!components/ddGallery/ddGallery'],functio
                 data: '=ddGallery'
             },
             template:
-                '<a ng-repeat="img in imgs" ng-class="img.mod" class="dd-b-gallery-item" style="width:{{img._width}}px;height:{{img._height}}px;" >' +
-                    '<img ng-src="{{img._src}}" style="width:{{img._width}}px;height:{{img._height}}px;" />' +
+                '<a title="{{img.title}}" href="{{img.src}}" ng-repeat="img in imgs" ng-class="img.mod" dd-image="imgs1" dd-image-size="{width: {{img.width}}, height:{{img.height}} }" class="dd-b-gallery-item" style="width:{{img._width}}px;height:{{img._height}}px;" >' +
+                    '<img alt="{{img.title}}" ng-src="{{img._src}}" style="width:{{img._width}}px;height:{{img._height}}px;" />' +
                 '</a>',
             compile: function(tElement){
                 tElement.addClass('dd-b-gallery clearfix');

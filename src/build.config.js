@@ -2,14 +2,13 @@
       baseUrl: ".",
       //optimize: "none",
       separateCSS: true,
-      include:['requireLib'],
       paths: {
           'requireLib': 'vendor/requirejs/require',
-          'angular': 'vendor/angular/angular',
+          'angular': 'vendor/angular/angular.min',
           'LocalStorageModule': 'vendor/localStorageService/LocalStorageModule'
       },
       shim: {
-          'angular': { deps:['vendor/jquery/jquery','css!vendor/bootstrap/css/bootstrap'], export: 'angular'},
+          'angular': { deps:['vendor/jquery/jquery'], export: 'angular'},
           'LocalStorageModule': {deps:['angular']}
       },
       map: {

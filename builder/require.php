@@ -10,7 +10,10 @@ $_sModule = basename($require);
 if($_bIsDebug) {
     $_sRequireScript = file_get_contents(__DIR__.'/../src/vendor/requirejs/require.js');
     $_sRequireScript .= file_get_contents(__DIR__.'/../src/require.config.js');
-    $_sRequireScript .= "\nrequire(['$require']);";
+    $_sAngularLocale = file_get_contents(__DIR__."/../i18n/angular/angular-locale_$require_locale.js");
+    $_sLocale = file_get_contents(__DIR__."/../i18n/$require_locale.js");
+    $_sRequireScript .= "\ndefine('locale',['angular'], function(){".$_sAngularLocale."});\n$_sLocale;";
+    $_sRequireScript .= "\nrequire(['$require','locale']);";
     echo "<script type=\"text/javascript\">$_sRequireScript</script>";
 } else {
     $_sGitCmd = "git --git-dir ".$_GIT_DIR." log -1";
@@ -27,7 +30,7 @@ if($_bIsDebug) {
 }
 
 function build($version){
-    global $require_build, $_C_DIR, $_sModule;
+    global $require_build, $require_locale, $_C_DIR, $_sModule;
     
     $_oldVersion = `find $_C_DIR -name '$_sModule.*'`;
     $bHasOld = false;
@@ -40,6 +43,6 @@ function build($version){
         file_put_contents($_C_DIR."/".$_sModule.".".$version.".css","");
         file_put_contents($_C_DIR."/".$_sModule.".".$version.".js","");
     }
-    $sBuildCmd = __DIR__."/build.sh $require_build $_sModule $version";
+    $sBuildCmd = __DIR__."/build.sh $require_build $require_locale $_sModule $version";
     exec(sprintf("%s > %s 2>&1 & echo $! >> %s", $sBuildCmd, $_C_DIR.'/builder.log', tempnam($_C_DIR, "builder")));
 }

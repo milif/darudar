@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
   <head>
-    <? error_reporting(E_ALL); $require= '../ddPrototype'; $require_build= '../prototypes/ddPrototype'; include __DIR__.'/../builder/require.php'; ?>
+    <meta charset="utf-8">
+    <? error_reporting(E_ALL); $require_locale = 'ru-ru'; $require = '../ddPrototype'; $require_build= '../prototypes/ddPrototype'; include __DIR__.'/../builder/require.php'; ?>
   </head>
   <body style="background: url(background.png);">   
     <div id="layout" ng-controller="mainCntl" ng-class="ready" class="container-fluid" style="opacity: 0;">
@@ -22,10 +23,10 @@
     </div>
     <script>
         var UI_DATA = {
-            'components': [
-                ['dd-gallery','Image gallery']
-            ]
-        };
+                'components': [
+                    ['dd-gallery','Image gallery']
+                ]
+            };
     </script>     
     <style>
         #layout {

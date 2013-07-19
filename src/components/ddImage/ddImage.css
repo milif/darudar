@@ -1,0 +1,12 @@
+.dd-b-popup.mod_image.has_title .modal {
+    position: relative;
+    top: -15px;
+    left: auto;
+    }
+.dd-b-popup.mod_image .modal-body {
+    padding: 0;
+    }
+.dd-b-modalimage .dd-c-title {
+    color: white;
+    text-align: center;
+    }
