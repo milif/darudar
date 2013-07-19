@@ -3,7 +3,7 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
         var $ = angular.element,
             popupGalleryTpl = $compile($(
                 '<div class="dd-b-modalimage">' +
-                    '<img style="width:100%;height:100%;" ng-src="{{src}}" />' +
+                    '<img style="width:{{size.width}}px;height:{{size.height}}px;" ng-src="{{src}}" />' +
                     '<p class="dd-c-title">{{title}}</p>' +
                 '</div>'
             ));
@@ -34,6 +34,7 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
                                         scope.mod = iAttrs.title ? 'mod_title' : '';
                                         scope.src = src;
                                         scope.title = iAttrs.title;
+                                        scope.size = calcSize;
                                         
                                         popupGalleryTpl(scope, function(el){
                                             done({el: el, width: calcSize.width, height: calcSize.height});
