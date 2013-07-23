@@ -88,7 +88,6 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
             
             scope._zoomReady = false;
                
-            setTimeout(function(){
             $(new Image())
                 .attr('src', scope.originalSrc)
                 .load(function(){
@@ -111,11 +110,10 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
                     
                     $timeout(function(){
                         updateZoom.call(scope, e);
-                    }, 30);
+                    }, 0);
                         
                     scope.$digest();
                 });
-            },1000);
             
             $timeout(function(){
                 if(loadingDone === true) return;
