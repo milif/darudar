@@ -40,7 +40,7 @@ define(['ddApp','services/ddLoading/ddLoading','css!services/ddPopup/ddPopup'],f
         ddPopup.getViewSize = function(){
             return {
                 width: $($window).width() - 60,
-                height: $($window).height() - 60
+                height: $($window).height() - 65
             };
         }  
         ddPopup.open = function (cfg){

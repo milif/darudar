@@ -24,15 +24,15 @@
         .dd-b-modalimage .dd-c-image-h {
             display: table-cell;
             vertical-align: middle;
+            text-align: center;
             }      
             .dd-b-modalimage .dd-c-title {
                 color: white;
                 text-align: center;
-                display: none;
+                position: absolute;
+                top: 100%;
+                width: 100%;
                 }
-                .has_title .dd-c-title {
-                    display: block;
-                    }
             .dd-b-modalimage.mod_zoom .dd-c-img {
                 cursor: pointer;
                 cursor: -webkit-zoom-in;

@@ -3,13 +3,13 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
         var $ = angular.element,
             popupGalleryTpl = $compile($(
                 '<div class="dd-b-modalimage">' +
-                    '<div ng-mousemove="updateZoom($event)" ng-show="showZoomIn" ng-click="zoomOut()" ng-animate="{show: \'dd-a-fade-enter\', hide: \'dd-a-fade-leave\'}" class="dd-c-zoomin"></div>' +
-                    '<div ng-hide="showZoomIn" ng-animate="{hide: \'dd-a-fade-leave\'}" class="dd-c-image-hh">' +
+                    '<div ng-mousemove="updateZoom($event)" ng-show="showZoomIn" ng-click="zoomOut()" class="dd-c-zoomin"></div>' +
+                    '<div ng-hide="showZoomIn" class="dd-c-image-hh">' +
                         '<div class="dd-c-image-h">' +
                             '<img ng-click="zoomIn($event)" class="dd-c-img"  style="width:{{size.width}}px;height:{{size.height}}px;" ng-src="{{src}}" />' +
-                            '<p class="dd-c-title">{{title}}</p>' +
                         '</div>' + 
                     '</div>' +
+                    '<p class="dd-c-title">{{title}}</p>' +
                 '</div>'
             ));
         return {
@@ -32,7 +32,7 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
                                 height: calcSize.height
                             },
                             loader: function(done){
-                                setTimeout(function(){
+
                                 $(new Image())
                                     .attr("src", src)
                                     .load(function(){ 
@@ -65,7 +65,7 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
                                         });
                                         scope.$digest();
                                     });
-                                },1000);
+
                             }
                         });
                     });
@@ -75,9 +75,9 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
         function nullFn(){
         }
         function zoomIn(e){       
-            
+
             if(this._inZoom) return;
-            
+          
             this._inZoom = true;
                
             var scope = this,
@@ -126,7 +126,7 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
         }
         function zoomOut(){
             
-            if(!this._zoomReady) return;
+            if(!this._zoomReady || !this._inZoom) return;
             
             this._inZoom = false;
         
