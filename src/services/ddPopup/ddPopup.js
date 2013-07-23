@@ -32,15 +32,15 @@ define(['ddApp','services/ddLoading/ddLoading','css!services/ddPopup/ddPopup'],f
                 height: 'auto',
                 width: $($window).width() / 2
             },
-                          
+            setSize: setSize,            
             setLoader: setLoader,
             open: open,
             close: close
         };
         ddPopup.getViewSize = function(){
             return {
-                width: $($window).width() - 70,
-                height: $($window).height() - 90
+                width: $($window).width() - 60,
+                height: $($window).height() - 60
             };
         }  
         ddPopup.open = function (cfg){
@@ -150,6 +150,12 @@ define(['ddApp','services/ddLoading/ddLoading','css!services/ddPopup/ddPopup'],f
             
             return this;
         }
+        function setSize(size){
+            var scope = this.scope;
+            scope.width = toSize(size.width);
+            scope.height = toSize(size.height);
+            if(scope.$$phase != '$apply') scope.$digest();
+        }
         function setLoader(loader){
             var self = this,
                 scope = this.scope,
@@ -163,7 +169,9 @@ define(['ddApp','services/ddLoading/ddLoading','css!services/ddPopup/ddPopup'],f
   
             $timeout(function(){
                 if(loadingDone === true) return;
-                loadingDone = ddLoading.show(self._el, self.scope);
+                loadingDone = ddLoading.show(self._el, self.scope, {
+                    mod: 'transparent'
+                });
             }, 500);
                 
             deferedLoader.promise.then(function(content){

@@ -11,3 +11,7 @@
     .dd-b-loading.dd-a-fade-leave {
         background-image: none;
         }
+/*MOD TRANSPARENT*/
+.dd-b-loading.mod_transparent {
+    background-color: transparent;
+    }

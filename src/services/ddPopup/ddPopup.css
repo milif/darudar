@@ -52,7 +52,15 @@ html.noscroll body {
         opacity: 1;
         visibility: visible;
         }
-/*B-LOADING*/
-.dd-b-popup .dd-b-loading {
-    background-color: transparent;
+/*MOD IMAGE*/        
+.dd-b-popup.mod_image.has_title .modal {
+    position: relative;
+    top: -15px;
+    left: auto;
+    }
+.dd-b-popup.mod_image .modal {
+    background: transparent;
+    }
+.dd-b-popup.mod_image .modal-body {
+    padding: 0;
     }

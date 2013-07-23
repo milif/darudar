@@ -1,12 +1,40 @@
-.dd-b-popup.mod_image.has_title .modal {
-    position: relative;
-    top: -15px;
-    left: auto;
-    }
-.dd-b-popup.mod_image .modal-body {
-    padding: 0;
-    }
-.dd-b-modalimage .dd-c-title {
-    color: white;
-    text-align: center;
-    }
+.dd-b-modalimage {
+    width: 100%;
+    height: 100%;
+    }  
+    .dd-b-modalimage .dd-c-zoomin {
+        width: 100%;
+        height: 100%;
+        background: transparent no-repeat;
+        position: absolute;
+        z-index: 1;
+        display: none;
+        cursor: pointer;
+        cursor: -webkit-zoom-out;
+        cursor: -moz-zoom-out;
+        } 
+        .dd-b-modalimage.mod_inzoom .dd-c-zoomin {
+            display: block;
+            }
+    .dd-b-modalimage .dd-c-image-hh {
+        display: table;
+        height: 100%;
+        margin: 0 auto;
+        }     
+        .dd-b-modalimage .dd-c-image-h {
+            display: table-cell;
+            vertical-align: middle;
+            }      
+            .dd-b-modalimage .dd-c-title {
+                color: white;
+                text-align: center;
+                display: none;
+                }
+                .has_title .dd-c-title {
+                    display: block;
+                    }
+            .dd-b-modalimage.mod_zoom .dd-c-img {
+                cursor: pointer;
+                cursor: -webkit-zoom-in;
+                cursor: -moz-zoom-in;
+                }
