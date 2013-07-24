@@ -99,18 +99,14 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
                     scope.showZoomIn = true;
                     scope._zoomEl = scope._el
                         .addClass('mod_inzoom')
-                        .find('.dd-c-zoomin').css({
-                            backgroundImage: 'url(' + scope.originalSrc + ')'
-                        });                    
+                        .find('.dd-c-zoomin');                    
                     
                     scope.popup.setSize({
                         width: Math.min(viewSize.width, this.width),
                         height: Math.min(viewSize.height, this.height)
                     });
                     
-                    $timeout(function(){
-                        updateZoom.call(scope, e);
-                    }, 0);
+                    updateZoom.call(scope, e);
                         
                     scope.$digest();
                 });
@@ -129,7 +125,7 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
             this._inZoom = false;
         
             var scope = this;
-            
+            scope._zoomEl.css('background-image', 'none');
             scope.showZoomIn = false;
             scope.popup.setSize(scope.size);
         }
@@ -157,7 +153,10 @@ define(['ddApp','services/ddImage','services/ddPopup/ddPopup','css!components/dd
             offset= Math.min(offset, zoomSize.height - 2 * marginH);
             height = - Math.round(offset * (originalSize.height - zoomSize.height)/ (zoomSize.height - 2 * marginH) ) + "px";
 
-            zoomEl.css('background-position', width + ' ' + height);           
+            zoomEl.css({
+                'background-position': width + ' ' + height,
+                'background-image': 'url(' + scope.originalSrc + ')'
+            });           
         }
         function calculateSize(originalSize, viewSize){
             var ratio = originalSize.width / originalSize.height,
